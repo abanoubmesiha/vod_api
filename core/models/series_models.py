@@ -44,21 +44,46 @@ class Series(models.Model):
             "country": self.country.serialize(),
         }
 
+class Season(models.Model):
+    number = models.IntegerField(default=1, validators=[MaxValueValidator(33), MinValueValidator(1)])
+    title_ar = models.CharField(max_length=150)
+    title_en = models.CharField(max_length=150)
+    
+    poster = models.CharField(max_length=300, null=True, blank=True)
+
+    series = models.ForeignKey('Series', null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.number}"
+
+    def serialize(self):
+        return {
+            "id": self.id,
+
+            "number": self.number,
+            "title_ar": self.title_ar,
+            "title_en": self.title_en,
+
+            "poster": self.poster,
+            
+            "series": self.series.serialize(),
+        }
+
 class Episode(models.Model):
-    no = models.IntegerField(default=1, validators=[MaxValueValidator(728), MinValueValidator(1)])
+    number = models.IntegerField(default=1, validators=[MaxValueValidator(728), MinValueValidator(1)])
     
     cover = models.CharField(max_length=300, null=True, blank=True)
 
     series = models.ForeignKey('Series', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.no}"
+        return f"{self.number}"
 
     def serialize(self):
         return {
             "id": self.id,
 
-            "no": self.no,
+            "number": self.number,
 
             "cover": self.cover,
             
