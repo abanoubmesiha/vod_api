@@ -44,3 +44,23 @@ class Series(models.Model):
             "country": self.country.serialize(),
         }
 
+class Episode(models.Model):
+    no = models.IntegerField(default=1, validators=[MaxValueValidator(728), MinValueValidator(1)])
+    
+    cover = models.CharField(max_length=300, null=True, blank=True)
+
+    series = models.ForeignKey('Series', null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.no}"
+
+    def serialize(self):
+        return {
+            "id": self.id,
+
+            "no": self.no,
+
+            "cover": self.cover,
+            
+            "series": self.series.serialize(),
+        }
