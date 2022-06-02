@@ -17,12 +17,15 @@ class Movie(models.Model):
     duration = models.IntegerField(default=0, validators=[MaxValueValidator(5160), MinValueValidator(0)])
     created_at = models.DateTimeField(auto_now_add=True)
 
+    country = models.ForeignKey('Country', null=True, blank=True, on_delete=models.SET_NULL)
+
     def __str__(self):
         return f"{self.title_en}"
 
     def serialize(self):
         return {
             "id": self.id,
+
             "title_ar": self.title_ar,
             "title_en": self.title_en,
 
@@ -37,5 +40,7 @@ class Movie(models.Model):
             "releaseYear": self.releaseYear,
             "duration": self.duration,
             "created_at": self.created_at,
+            
+            "country": self.country.serialize(),
         }
 
