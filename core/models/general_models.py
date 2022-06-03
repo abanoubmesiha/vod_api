@@ -19,3 +19,28 @@ class Country(models.Model):
             "created_at": self.created_at,
         }
 
+class Section(models.Model):
+    title_ar = models.CharField(max_length=150)
+    title_en = models.CharField(max_length=150)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    movies = models.ManyToManyField('Movie')
+    series = models.ManyToManyField('Series')
+
+    def __str__(self):
+        return f"{self.title_en}"
+
+    def serialize(self):
+        return {
+            "id": self.id,
+
+            "title_ar": self.title_ar,
+            "title_en": self.title_en,
+
+            "created_at": self.created_at,
+
+            "movies": [movie.serialize() for movie in self.movies.all()],
+            "series": [series.serialize() for series in self.series.all()],
+        }
+
