@@ -1,3 +1,3 @@
 from .general import Country, Section
 from .movie import Movie
-from .series import Series, Season, Episode
+from .series import Series, Episode

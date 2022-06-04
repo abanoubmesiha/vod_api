@@ -46,41 +46,16 @@ class Series(models.Model):
             "country": try_to_serialize(self.country),
         }
 
-class Season(models.Model):
-    number = models.IntegerField(default=1, validators=[MaxValueValidator(33), MinValueValidator(1)])
-    title_ar = models.CharField(max_length=150)
-    title_en = models.CharField(max_length=150)
-    
-    poster = models.CharField(max_length=300, null=True, blank=True)
-
-    series = models.ForeignKey('Series', null=True, blank=True, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.title_en} ({self.number})"
-
-    def serialize(self, options={}):
-        return {
-            "id": self.id,
-
-            "number": self.number,
-            "title_ar": self.title_ar,
-            "title_en": self.title_en,
-
-            "poster": self.poster,
-            
-            "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
-        }
-
 class Episode(models.Model):
     number = models.IntegerField(default=1, validators=[MaxValueValidator(728), MinValueValidator(1)])
     
     cover = models.CharField(max_length=300, null=True, blank=True)
 
-    season = models.ForeignKey('Season', on_delete=models.CASCADE)
+    series = models.ForeignKey('Series', on_delete=models.CASCADE)
 
     def __str__(self):
-        season = try_to_serialize(self.season)
-        return f"{season.get('title_en')} - E.{self.number}"
+        series = try_to_serialize(self.series)
+        return f"{series.get('title_en')} - E.{self.number}"
 
     def serialize(self, options={}):
         return {
@@ -90,5 +65,5 @@ class Episode(models.Model):
 
             "cover": self.cover,
             
-            "season": try_to_serialize(self.season) if options.get('with_season') else self.season.id
+            "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
         }
