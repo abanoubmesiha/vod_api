@@ -1,7 +1,7 @@
 from django.test import TestCase
 from ..models import Section
 
-class URLTests(TestCase):
+class Sections_Tests(TestCase):
     def setUp(self):
         Section.objects.create(title_en="section 1")
 
