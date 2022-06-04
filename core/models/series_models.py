@@ -58,7 +58,7 @@ class Season(models.Model):
     def __str__(self):
         return f"{self.title_en} ({self.number})"
 
-    def serialize(self):
+    def serialize(self, options = {}):
         return {
             "id": self.id,
 
@@ -68,7 +68,7 @@ class Season(models.Model):
 
             "poster": self.poster,
             
-            "series": try_to_serialize(self.series),
+            "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
         }
 
 class Episode(models.Model):
