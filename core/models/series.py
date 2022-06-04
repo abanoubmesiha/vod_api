@@ -20,11 +20,12 @@ class Series(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     country = models.ForeignKey('Country', null=True, blank=True, on_delete=models.SET_NULL)
+    seasons = models.ManyToManyField('Series', null=True, blank=True)
 
     def __str__(self):
         return f"{self.title_en}"
 
-    def serialize(self):
+    def serialize(self, options={}):
         return {
             "id": self.id,
 
@@ -44,6 +45,7 @@ class Series(models.Model):
             "created_at": self.created_at,
             
             "country": try_to_serialize(self.country),
+            "seasons":  [series.id if options.get('without_seasons') else try_to_serialize(series, {'without_seasons':True}) for series in self.seasons.all()],
         }
 
 class Episode(models.Model):
