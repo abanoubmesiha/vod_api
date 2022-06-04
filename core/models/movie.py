@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from core.models.utils import try_to_serialize
+
 class Movie(models.Model):
     title_ar = models.CharField(max_length=150)
     title_en = models.CharField(max_length=150)
@@ -41,6 +43,6 @@ class Movie(models.Model):
             "duration": self.duration,
             "created_at": self.created_at,
             
-            "country": self.country.serialize(),
+            "country": try_to_serialize(self.country),
         }
 

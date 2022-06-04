@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from core.models.utils import try_to_serialize
+
 class Series(models.Model):
     title_ar = models.CharField(max_length=150)
     title_en = models.CharField(max_length=150)
@@ -41,7 +43,7 @@ class Series(models.Model):
             "duration": self.duration,
             "created_at": self.created_at,
             
-            "country": self.country.serialize(),
+            "country": try_to_serialize(self.country),
         }
 
 class Season(models.Model):
@@ -54,9 +56,9 @@ class Season(models.Model):
     series = models.ForeignKey('Series', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.number}"
+        return f"{self.title_en} ({self.number})"
 
-    def serialize(self):
+    def serialize(self, options={}):
         return {
             "id": self.id,
 
@@ -66,7 +68,7 @@ class Season(models.Model):
 
             "poster": self.poster,
             
-            "series": self.series.serialize(),
+            "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
         }
 
 class Episode(models.Model):
@@ -74,12 +76,13 @@ class Episode(models.Model):
     
     cover = models.CharField(max_length=300, null=True, blank=True)
 
-    series = models.ForeignKey('Series', null=True, blank=True, on_delete=models.CASCADE)
+    season = models.ForeignKey('Season', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.number}"
+        season = try_to_serialize(self.season)
+        return f"{season.get('title_en')} - E.{self.number}"
 
-    def serialize(self):
+    def serialize(self, options={}):
         return {
             "id": self.id,
 
@@ -87,5 +90,5 @@ class Episode(models.Model):
 
             "cover": self.cover,
             
-            "series": self.series.serialize(),
+            "season": try_to_serialize(self.season) if options.get('with_season') else self.season.id
         }

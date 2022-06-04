@@ -1,5 +1,7 @@
 from django.db import models
 
+from core.models.utils import try_to_serialize
+
 class Country(models.Model):
     title_ar = models.CharField(max_length=150)
     title_en = models.CharField(max_length=150)
@@ -40,7 +42,7 @@ class Section(models.Model):
 
             "created_at": self.created_at,
 
-            "movies": [movie.serialize() for movie in self.movies.all()],
-            "series": [series.serialize() for series in self.series.all()],
+            "movies": [try_to_serialize(movie) for movie in self.movies.all()],
+            "series": [try_to_serialize(series) for series in self.series.all()],
         }
 
