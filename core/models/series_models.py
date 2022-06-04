@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+from core.models.utils import try_to_serialize
+
 class Series(models.Model):
     title_ar = models.CharField(max_length=150)
     title_en = models.CharField(max_length=150)
@@ -41,7 +43,7 @@ class Series(models.Model):
             "duration": self.duration,
             "created_at": self.created_at,
             
-            "country": self.country.serialize(),
+            "country": try_to_serialize(self.country),
         }
 
 class Season(models.Model):
@@ -66,7 +68,7 @@ class Season(models.Model):
 
             "poster": self.poster,
             
-            "series": self.series.serialize(),
+            "series": try_to_serialize(self.series),
         }
 
 class Episode(models.Model):
@@ -87,5 +89,5 @@ class Episode(models.Model):
 
             "cover": self.cover,
             
-            "series": self.series.serialize(),
+            "series": try_to_serialize(self.series),
         }
