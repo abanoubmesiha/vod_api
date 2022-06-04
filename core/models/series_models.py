@@ -56,7 +56,7 @@ class Season(models.Model):
     series = models.ForeignKey('Series', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.number}"
+        return f"{self.title_en} ({self.number})"
 
     def serialize(self):
         return {
@@ -76,10 +76,13 @@ class Episode(models.Model):
     
     cover = models.CharField(max_length=300, null=True, blank=True)
 
-    series = models.ForeignKey('Series', null=True, blank=True, on_delete=models.CASCADE)
+    series = models.ForeignKey('Series', on_delete=models.CASCADE)
+    season = models.ForeignKey('Season', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.number}"
+        series = try_to_serialize(self.series)
+        season = try_to_serialize(self.season)
+        return f"{series.get('title_en')} - {season.get('title_en')} - E.{self.number}"
 
     def serialize(self):
         return {
@@ -90,4 +93,5 @@ class Episode(models.Model):
             "cover": self.cover,
             
             "series": try_to_serialize(self.series),
+            "season": try_to_serialize(self.season),
         }
