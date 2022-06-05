@@ -20,6 +20,7 @@ class Movie(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     country = models.ForeignKey('Country', null=True, blank=True, on_delete=models.SET_NULL)
+    genre = models.ManyToManyField('Genre', null=True, blank=True)
 
     def __str__(self):
         return f"{self.title_en}"
@@ -44,5 +45,6 @@ class Movie(models.Model):
             "created_at": self.created_at,
             
             "country": try_to_serialize(self.country),
+            "genre": try_to_serialize(self.genre),
         }
 
