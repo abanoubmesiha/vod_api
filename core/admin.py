@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import (
-    Movie, Country, Series, Episode, Section
+    Movie, Country, Series, Episode, Section, Artist, Actor, Director
 )
 
 
@@ -9,3 +9,6 @@ admin.site.register(Country)
 admin.site.register(Series)
 admin.site.register(Episode)
 admin.site.register(Section)
+admin.site.register(Artist)
+admin.site.register(Actor)
+admin.site.register(Director)
