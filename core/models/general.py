@@ -78,9 +78,9 @@ class Comment(models.Model):
     down_votes = models.IntegerField(default=0, validators=[MaxValueValidator(10000000), MinValueValidator(0)])
 
     # user = models.ForeignKey('User', on_delete=models.SET_NULL)
-    movie = models.ForeignKey('Movie', on_delete=models.CASCADE)
-    series = models.ForeignKey('Series', on_delete=models.CASCADE)
-    episode = models.ForeignKey('Episode', on_delete=models.CASCADE)
+    movie = models.ForeignKey('Movie', null=True, blank=True, on_delete=models.CASCADE)
+    series = models.ForeignKey('Series', null=True, blank=True, on_delete=models.CASCADE)
+    episode = models.ForeignKey('Episode', null=True, blank=True, on_delete=models.CASCADE)
     
     def __str__(self):
         return f"{self.body}"
