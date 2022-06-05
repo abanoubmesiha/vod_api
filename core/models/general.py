@@ -95,10 +95,6 @@ class Comment(models.Model):
 
             "up_votes": self.up_votes,
             "down_votes": self.down_votes,
-            
-            "movie": self.movie.id,
-            "series": self.series.id,
-            "episode": self.episode.id,
 
-            # "user": try_to_serialize(self.user),
+            "user": None,# try_to_serialize(self.user),
         }
