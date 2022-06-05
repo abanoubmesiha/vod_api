@@ -1,7 +1,5 @@
 from django.db import models
 
-from core.models.utils import try_to_serialize
-
 class Artist(models.Model):
     title_ar = models.CharField(max_length=150)
     title_en = models.CharField(max_length=150)

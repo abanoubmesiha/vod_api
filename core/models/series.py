@@ -21,7 +21,7 @@ class Series(models.Model):
 
     country = models.ForeignKey('Country', null=True, blank=True, on_delete=models.SET_NULL)
     seasons = models.ManyToManyField('Series', blank=True)
-    genre = models.ManyToManyField('Genre', blank=True)
+    genres = models.ManyToManyField('Genre', blank=True)
 
     class Meta:
         verbose_name_plural = 'Series'
@@ -50,7 +50,7 @@ class Series(models.Model):
             
             "country": try_to_serialize(self.country),
             "seasons":  [series.id if options.get('without_seasons') else try_to_serialize(series, {'without_seasons':True}) for series in self.seasons.all()],
-            "genre": try_to_serialize(self.genre),
+            "genres": [try_to_serialize(genre) for genre in self.genres.all()],
         }
 
 class Episode(models.Model):
