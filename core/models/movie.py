@@ -20,7 +20,7 @@ class Movie(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     country = models.ForeignKey('Country', null=True, blank=True, on_delete=models.SET_NULL)
-    genre = models.ManyToManyField('Genre', null=True, blank=True)
+    genre = models.ManyToManyField('Genre', blank=True)
 
     def __str__(self):
         return f"{self.title_en}"

@@ -20,8 +20,8 @@ class Series(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     country = models.ForeignKey('Country', null=True, blank=True, on_delete=models.SET_NULL)
-    seasons = models.ManyToManyField('Series', null=True, blank=True)
-    genre = models.ManyToManyField('Genre', null=True, blank=True)
+    seasons = models.ManyToManyField('Series', blank=True)
+    genre = models.ManyToManyField('Genre', blank=True)
 
     class Meta:
         verbose_name_plural = 'Series'
