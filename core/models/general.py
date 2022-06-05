@@ -11,7 +11,7 @@ class Country(models.Model):
     def __str__(self):
         return f"{self.title_en}"
 
-    def serialize(self):
+    def serialize(self, options={}):
         return {
             "id": self.id,
 
@@ -33,7 +33,7 @@ class Section(models.Model):
     def __str__(self):
         return f"{self.title_en}"
 
-    def serialize(self):
+    def serialize(self, options={}):
         return {
             "id": self.id,
 

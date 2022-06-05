@@ -1,5 +1,5 @@
-def try_to_serialize(model):
+def try_to_serialize(model, options={}):
     try:
-        return model.serialize()
+        return model.serialize(options)
     except:
         return None
