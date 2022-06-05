@@ -83,3 +83,9 @@ class Artist(models.Model):
 
             "created_at": self.created_at,
         }
+
+class Actor(Artist):
+    pass
+
+class Director(Artist):
+    pass
