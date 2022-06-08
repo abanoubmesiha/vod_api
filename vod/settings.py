@@ -31,13 +31,20 @@ ALLOWED_HOSTS = ['127.0.0.1', '49.12.195.122']
 # Application definition
 
 INSTALLED_APPS = [
-    'core',
+    # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-Party Apps
+    'rest_framework',
+    'rest_framework.authtoken',
+
+    # Local Apps
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -99,6 +106,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
 
 
 # Internationalization
