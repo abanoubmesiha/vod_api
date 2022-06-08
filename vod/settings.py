@@ -77,8 +77,7 @@ WSGI_APPLICATION = 'vod.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR.as_posix() + '/db.sqlite3',
-        # 'NAME': BASE_DIR.as_posix() +'db.sqlite3',
+        'NAME': BASE_DIR.parent.as_posix() + '/db.sqlite3',
     }
 }
 
