@@ -3,6 +3,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 from core.models.utils import try_to_serialize
 
+def upload_to(instance, filename):
+    return 'movies/' + instance.title_en + '/' + filename
+
 class Movie(models.Model):
     title_ar = models.CharField(max_length=150)
     title_en = models.CharField(max_length=150)
@@ -10,8 +13,8 @@ class Movie(models.Model):
     description_ar = models.CharField(max_length=5000, null=True, blank=True)
     description_en = models.CharField(max_length=5000, null=True, blank=True)
     
-    cover = models.CharField(max_length=300, null=True, blank=True)
-    poster = models.CharField(max_length=300, null=True, blank=True)
+    cover = models.ImageField(upload_to=upload_to, default="default.gif", null=True, blank=True)
+    poster = models.ImageField(upload_to=upload_to, default="default.gif", null=True, blank=True)
     trailer = models.CharField(max_length=300, null=True, blank=True)
     
     rating = models.IntegerField(default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
@@ -35,8 +38,8 @@ class Movie(models.Model):
             "description_ar": self.description_ar,
             "description_en": self.description_en,
 
-            "cover": self.cover,
-            "poster": self.poster,
+            "cover": self.cover.url,
+            "poster": self.poster.url,
             "trailer": self.trailer,
 
             "rating": self.rating,
@@ -47,4 +50,5 @@ class Movie(models.Model):
             "country": try_to_serialize(self.country),
             "genres": [try_to_serialize(genre) for genre in self.genres.all()],
         }
+    
 
