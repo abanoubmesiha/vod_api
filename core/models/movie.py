@@ -10,8 +10,8 @@ class Movie(models.Model):
     description_ar = models.CharField(max_length=5000, null=True, blank=True)
     description_en = models.CharField(max_length=5000, null=True, blank=True)
     
-    cover = models.CharField(max_length=300, null=True, blank=True)
-    poster = models.CharField(max_length=300, null=True, blank=True)
+    cover = models.ImageField(default='default-img.gif', null=True, blank=True)
+    poster = models.ImageField(default='default-img.gif', null=True, blank=True)
     trailer = models.CharField(max_length=300, null=True, blank=True)
     
     rating = models.IntegerField(default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
@@ -35,8 +35,8 @@ class Movie(models.Model):
             "description_ar": self.description_ar,
             "description_en": self.description_en,
 
-            "cover": self.cover,
-            "poster": self.poster,
+            "cover": self.cover.url,
+            "poster": self.poster.url,
             "trailer": self.trailer,
 
             "rating": self.rating,
