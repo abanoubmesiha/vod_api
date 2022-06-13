@@ -25,84 +25,9 @@ SECRET_KEY = 'django-insecure-hn6pv8&8pl$t8pkw&h(*i-c7rx_zsk&86e$sf9!6+aj2gp#$$!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'localhost:8000',
-    '127.0.0.1:8000',
-    'localhost:7000',
-    '127.0.0.1:7000',
-    'localhost:7001',
-    '127.0.0.1:7001',
-    '49.12.195.122',
-    '49.12.195.122:8000',
-    '49.12.195.122:7000',
-    '49.12.195.122:7001',
-    'http://localhost',
-    'http://127.0.0.1',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'http://localhost:7000',
-    'http://127.0.0.1:7000',
-    'http://localhost:7001',
-    'http://127.0.0.1:7001',
-    'http://49.12.195.122',
-    'http://49.12.195.122:8000',
-    'http://49.12.195.122:7000',
-    'http://49.12.195.122:7001',
-    'http://localhost/',
-    'http://127.0.0.1/',
-    'http://localhost:8000/',
-    'http://127.0.0.1:8000/',
-    'http://localhost:7000/',
-    'http://127.0.0.1:7000/',
-    'http://localhost:7001/',
-    'http://127.0.0.1:7001/',
-    'http://49.12.195.122/',
-    'http://49.12.195.122:8000/',
-    'http://49.12.195.122:7000/',
-    'http://49.12.195.122:7001/',
-]
-CORS_ALLOWED_ORIGINS = [
-    'localhost',
-    '127.0.0.1',
-    'localhost:8000',
-    '127.0.0.1:8000',
-    'localhost:7000',
-    '127.0.0.1:7000',
-    'localhost:7001',
-    '127.0.0.1:7001',
-    '49.12.195.122',
-    '49.12.195.122:8000',
-    '49.12.195.122:7000',
-    '49.12.195.122:7001',
-    'http://localhost',
-    'http://127.0.0.1',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'http://localhost:7000',
-    'http://127.0.0.1:7000',
-    'http://localhost:7001',
-    'http://127.0.0.1:7001',
-    'http://49.12.195.122',
-    'http://49.12.195.122:8000',
-    'http://49.12.195.122:7000',
-    'http://49.12.195.122:7001',
-    'http://localhost/',
-    'http://127.0.0.1/',
-    'http://localhost:8000/',
-    'http://127.0.0.1:8000/',
-    'http://localhost:7000/',
-    'http://127.0.0.1:7000/',
-    'http://localhost:7001/',
-    'http://127.0.0.1:7001/',
-    'http://49.12.195.122/',
-    'http://49.12.195.122:8000/',
-    'http://49.12.195.122:7000/',
-    'http://49.12.195.122:7001/',
-]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '49.12.195.122']
+CORS_ALLOWED_ORIGINS = ['localhost', '127.0.0.1', '49.12.195.122']
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -126,14 +51,16 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Third-Party Middlewares
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'vod.urls'
