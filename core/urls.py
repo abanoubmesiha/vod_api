@@ -8,7 +8,7 @@ from .views import auth
 
 urlpatterns = [
     path('login/', auth.login),
-    path('api-token-auth/', obtain_auth_token),
+    path('api-token-auth', obtain_auth_token),
     path('sections', sections.get_all),
     path('movies/<int:movie_id>', movies.get_one),
     path('movies/<int:movie_id>/video', movies.get_movie_video),
