@@ -11,6 +11,8 @@ urlpatterns = [
     path('api-token-auth/', obtain_auth_token),
     path('sections', sections.get_all),
     path('movies/<int:movie_id>', movies.get_one),
+    path('movies/<int:movie_id>/video', movies.get_movie_video),
     path('series/<int:series_id>', series.get_one),
     path('episodes/<int:episode_id>', episodes.get_one),
+    path('episodes/<int:episode_id>/video', episodes.get_episode_video),
 ]

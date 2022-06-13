@@ -16,6 +16,7 @@ class Movie(models.Model):
     cover = models.ImageField(upload_to=upload_to, default="default.gif", null=True, blank=True)
     poster = models.ImageField(upload_to=upload_to, default="default.gif", null=True, blank=True)
     trailer = models.CharField(max_length=300, null=True, blank=True)
+    video = models.CharField(max_length=150, null=True, blank=True)
     
     rating = models.IntegerField(default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
     release_year = models.IntegerField(default=1888, validators=[MaxValueValidator(2999), MinValueValidator(1888)])
@@ -41,6 +42,7 @@ class Movie(models.Model):
             "cover": self.cover.url,
             "poster": self.poster.url,
             "trailer": self.trailer,
+            "video": self.video,
 
             "rating": self.rating,
             "release_year": self.release_year,
