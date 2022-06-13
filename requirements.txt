@@ -3,3 +3,4 @@ djangorestframework
 pillow
 django-cleanup
 django-cors-headers
+gunicorn
