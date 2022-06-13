@@ -25,11 +25,10 @@ SECRET_KEY = 'django-insecure-hn6pv8&8pl$t8pkw&h(*i-c7rx_zsk&86e$sf9!6+aj2gp#$$!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1', '49.12.195.122', '49.12.195.122:8000']
-# CORS_ALLOWED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://49.12.195.122', 'http://49.12.195.122:8000']
-ALLOWED_HOSTS = ["*"]
-CORS_ALLOWED_ORIGINS = ["*"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '49.12.195.122', '49.12.195.122:8000']
+CORS_ALLOWED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://49.12.195.122', 'http://49.12.195.122:8000']
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = False
 
 # Application definition
 
@@ -53,6 +52,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -60,9 +60,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    # Third-Party Middlewares
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'vod.urls'
