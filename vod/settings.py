@@ -28,15 +28,30 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
+    'localhost:8000',
+    '127.0.0.1:8000',
+    'localhost:7000',
+    '127.0.0.1:7000',
+    'localhost:7001',
+    '127.0.0.1:7001',
     '49.12.195.122',
     '49.12.195.122:8000',
+    '49.12.195.122:7000',
+    '49.12.195.122:7001',
 ]
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost',
-    'http://127.0.0.1',
-    'http://49.12.195.122',
-    'http://49.12.195.122:8000',
-    'http://49.12.195.122:8000/',
+    'localhost',
+    '127.0.0.1',
+    'localhost:8000',
+    '127.0.0.1:8000',
+    'localhost:7000',
+    '127.0.0.1:7000',
+    'localhost:7001',
+    '127.0.0.1:7001',
+    '49.12.195.122',
+    '49.12.195.122:8000',
+    '49.12.195.122:7000',
+    '49.12.195.122:7001',
 ]
 CORS_ALLOW_HEADERS = [
     "Access-Control-Allow-Origin",
@@ -67,12 +82,12 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.security.SecurityMiddleware',
-    # 'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
-    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # 'django.contrib.messages.middleware.MessageMiddleware',
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'vod.urls'
