@@ -1,4 +1,5 @@
-django
+django==2.1.*
 djangorestframework
 pillow
 django-cleanup
+django-cors-headers
