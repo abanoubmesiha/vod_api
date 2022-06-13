@@ -11,8 +11,11 @@ def login(request):
 
 @api_view(['POST'])
 def get_token(request):
-    response = Response({'token': 'token.key'})
-    response["Access-Control-Allow-Origin"] = "*"
-    response["Access-Control-Allow-Methods"] = "POST"
-    response["Access-Control-Allow-Headers"] = "*"
-    return response
+    return Response(
+        {'token': 'token.key'},
+        headers={
+            "Access-Control-Allow-Origin" : "*",
+            "Access-Control-Allow-Methods" : "POST",
+            "Access-Control-Allow-Headers" : "*",
+        }
+    )
