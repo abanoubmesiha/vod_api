@@ -1,3 +1,4 @@
+from urllib import response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -10,4 +11,8 @@ def login(request):
 
 @api_view(['POST'])
 def get_token(request):
-    return Response({'token': 'token.key'})
+    response = Response({'token': 'token.key'})
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "POST"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
