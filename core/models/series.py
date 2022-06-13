@@ -65,6 +65,7 @@ class Episode(models.Model):
     number = models.IntegerField(default=1, validators=[MaxValueValidator(728), MinValueValidator(1)])
     
     cover = models.ImageField(upload_to=upload_episode_to, default="default.gif", null=True, blank=True)
+    video = models.CharField(max_length=150, null=True, blank=True)
 
     series = models.ForeignKey('Series', on_delete=models.CASCADE)
 
@@ -79,6 +80,7 @@ class Episode(models.Model):
             "number": self.number,
 
             "cover": self.cover.url,
+            "video": self.video,
             
             "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
         }
