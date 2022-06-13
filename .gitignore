@@ -6,6 +6,9 @@ __pycache__
 *.sqlite3
 media
 static
+virtual_env
+gunicorn_config
+gunicorn*
 
 # Backup files # 
 *.bak 
