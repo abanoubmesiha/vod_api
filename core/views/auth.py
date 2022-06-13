@@ -7,3 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 def login(request):
     content = {'message': 'Hello, World!'}
     return Response(content)
+
+@api_view(['POST'])
+def get_token(request):
+    return Response({'token': 'token.key'})
