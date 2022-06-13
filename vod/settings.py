@@ -102,6 +102,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://49.12.195.122:7001/',
 ]
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
