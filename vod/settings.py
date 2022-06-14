@@ -45,15 +45,15 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'django_cleanup.apps.CleanupConfig',
-    'corsheaders',
+    # 'corsheaders',
 
     # Local Apps
     'core',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
