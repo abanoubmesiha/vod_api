@@ -8,6 +8,7 @@ from .views import auth
 
 urlpatterns = [
     path('login/', auth.login),
+    path('test-cors/', sections.test_cors),
     path('api-token-auth/', obtain_auth_token),
     path('sections', sections.get_all),
     path('movies/<int:movie_id>', movies.get_one),

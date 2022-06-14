@@ -7,3 +7,12 @@ def get_all(request):
     sections = Section.objects.all()
     data = [section.serialize() for section in sections]
     return JsonResponse(envelope(data))
+
+def test_cors(request):
+    sections = Section.objects.all()
+    data = [section.serialize() for section in sections]
+    response = JsonResponse(envelope(data))
+    response["Access-Control-Allow-Origin"] = '*'
+    response['Access-Control-Allow-Methods'] = 'POST,GET,OPTIONS,PUT,DELETE'
+    response['Access-Control-Allow-Headers'] = 'Content-Type,Accept'
+    return response
