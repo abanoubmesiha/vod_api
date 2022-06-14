@@ -12,7 +12,7 @@ def test_cors(request):
     sections = Section.objects.all()
     data = [section.serialize() for section in sections]
     response = JsonResponse(envelope(data))
-    response["Access-Control-Allow-Origin"] = '*'
+    response["Access-Control-Allow-Origin"] = 'http://49.12.195.122:3000'
     response['Access-Control-Allow-Methods'] = 'POST,GET,OPTIONS,PUT,DELETE'
     response['Access-Control-Allow-Headers'] = 'Content-Type,Accept'
     return response
