@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('', lambda x: redirect('/admin')),
+    path('', lambda x: redirect('/admin/')),
     path('admin/', admin.site.urls),
     path('vod_api/', include('core.urls')),
 ]
