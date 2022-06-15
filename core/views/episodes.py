@@ -29,7 +29,7 @@ def get_episode_video(request, episode_id):
         response = JsonResponse(envelope({'video': episode.video}))
         response["access-control-allow-origin"] = 'http://49.12.195.122:3000'
         response['access-control-allow-methods'] = 'GET, PUT, POST, DELETE, HEAD, OPTIONS'
-        # response['access-control-allow-headers'] = 'Content-Type'
+        response['access-control-allow-headers'] = 'Content-Type, Authorization'
         response['Content-Type'] = 'application/json'
     except Episode.DoesNotExist:
         return JsonResponse(envelope(None, 404, 'Item Not Found'))
