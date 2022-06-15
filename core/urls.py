@@ -9,7 +9,6 @@ from .views import auth
 
 urlpatterns = [
     path('login/', auth.login),
-    # path('api-token-auth/', auth.get_token),
     path('api-token-auth/', csrf_exempt(obtain_auth_token)),
     path('sections', sections.get_all),
     path('movies/<int:movie_id>', movies.get_one),
