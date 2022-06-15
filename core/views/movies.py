@@ -12,6 +12,7 @@ def get_one(request, movie_id):
 
         serialized_movie = movie.serialize()
         serialized_movie['comments'] = [comment.serialize() for comment in comments]
+        serialized_movie['cast'] = movie.cast.serialize()
         return JsonResponse(envelope(serialized_movie))
     except Movie.DoesNotExist:
         return JsonResponse(envelope(None, 404, 'Item Not Found'))
