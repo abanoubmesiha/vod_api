@@ -26,18 +26,3 @@ class Actor(Artist):
 
 class Director(Artist):
     pass
-
-class Cast(models.Model):
-    movie = models.OneToOneField('Movie', on_delete=models.CASCADE, primary_key=True)
-
-    actors = models.ManyToManyField('Actor', blank=True)
-    directors = models.ManyToManyField('Director', blank=True)
-
-    def __str__(self):
-        return f"{self.movie.title_en} Cast"
-
-    def serialize(self, options={}):
-        return {
-            "actors": [try_to_serialize(actor) for actor in self.actors.all()],
-            "directors": [try_to_serialize(director) for director in self.directors.all()],
-        }
