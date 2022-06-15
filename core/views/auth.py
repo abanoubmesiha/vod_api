@@ -11,6 +11,7 @@ def login(request):
     content = {'message': 'Hello, World!'}
     return Response(content)
 
+@csrf_exempt
 def get_token(request):
     response = JsonResponse(envelope({'token': '59475edec9930601664b5fa6a13b2464cc05130d'}))
     response["access-control-allow-origin"] = 'http://49.12.195.122:8000'
