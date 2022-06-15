@@ -25,6 +25,9 @@ class Series(models.Model):
     country = models.ForeignKey('Country', null=True, blank=True, on_delete=models.SET_NULL)
     seasons = models.ManyToManyField('Series', blank=True)
     genres = models.ManyToManyField('Genre', blank=True)
+    
+    director = models.ForeignKey('Director', null=True, blank=True, on_delete=models.SET_NULL)
+    actors = models.ManyToManyField('Actor', blank=True)
 
     class Meta:
         verbose_name_plural = 'Series'
@@ -54,6 +57,9 @@ class Series(models.Model):
             "country": try_to_serialize(self.country),
             "seasons":  [series.id if options.get('without_seasons') else try_to_serialize(series, {'without_seasons':True}) for series in self.seasons.all()],
             "genres": [try_to_serialize(genre) for genre in self.genres.all()],
+            
+            "director": try_to_serialize(self.director),
+            "actors": [try_to_serialize(genre) for genre in self.actors.all()],
         }
 
 def upload_episode_to(instance, filename):

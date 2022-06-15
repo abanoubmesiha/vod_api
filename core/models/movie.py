@@ -25,6 +25,9 @@ class Movie(models.Model):
 
     country = models.ForeignKey('Country', null=True, blank=True, on_delete=models.SET_NULL)
     genres = models.ManyToManyField('Genre', blank=True)
+    
+    director = models.ForeignKey('Director', null=True, blank=True, on_delete=models.SET_NULL)
+    actors = models.ManyToManyField('Actor', blank=True)
 
     def __str__(self):
         return f"{self.title_en}"
@@ -51,6 +54,9 @@ class Movie(models.Model):
             
             "country": try_to_serialize(self.country),
             "genres": [try_to_serialize(genre) for genre in self.genres.all()],
+            
+            "director": try_to_serialize(self.director),
+            "actors": [try_to_serialize(genre) for genre in self.actors.all()],
         }
     
 
