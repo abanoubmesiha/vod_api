@@ -15,7 +15,7 @@ def login(request):
 @csrf_exempt
 def get_token(request):
     response = JsonResponse(envelope({'token': '59475edec9930601664b5fa6a13b2464cc05130d'}))
-    response["access-control-allow-origin"] = 'http://49.12.195.122:8000'
+    # response["access-control-allow-origin"] = 'http://49.12.195.122:8000'
     response['access-control-allow-methods'] = 'GET, PUT, POST, DELETE, HEAD, OPTIONS'
     response['access-control-allow-headers'] = 'Content-Type, Authorization'
     response['Content-Type'] = 'application/json'
