@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     Movie, Country, Series, Episode, Section, Artist, Actor, Director,
-    Genre, Comment, Cast
+    Genre, Comment
 )
 
 
@@ -15,4 +15,3 @@ admin.site.register(Actor)
 admin.site.register(Director)
 admin.site.register(Genre)
 admin.site.register(Comment)
-admin.site.register(Cast)
