@@ -62,15 +62,10 @@ class Series(models.Model):
             "actors": [try_to_serialize(genre) for genre in self.actors.all()],
         }
 
-# def upload_episode_to(instance, filename):
-#     series = try_to_serialize(instance.series)
-#     series_title_en = series.get('title_en')
-#     return 'series/' + series_title_en + '/episodes/' + str(instance.number) + '/' + filename
 
 class Episode(models.Model):
     number = models.IntegerField(default=1, validators=[MaxValueValidator(728), MinValueValidator(1)])
     
-    # cover = models.ImageField(upload_to=upload_episode_to, default="logo2.svg", null=True, blank=True)
     cover = models.CharField(max_length=150, null=True, blank=True)
     video = models.CharField(max_length=150, null=True, blank=True)
 
