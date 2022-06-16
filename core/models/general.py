@@ -27,8 +27,8 @@ class Section(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
-    movies = models.ManyToManyField('Movie')
-    series = models.ManyToManyField('Series')
+    movies = models.ManyToManyField('Movie', blank=True)
+    series = models.ManyToManyField('Series', blank=True)
 
     def __str__(self):
         return f"{self.title_en}"
