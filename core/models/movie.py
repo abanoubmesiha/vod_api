@@ -13,8 +13,8 @@ class Movie(models.Model):
     description_ar = models.CharField(max_length=5000, null=True, blank=True)
     description_en = models.CharField(max_length=5000, null=True, blank=True)
     
-    cover = models.ImageField(upload_to=upload_to, default="logo2.svg", null=True, blank=True)
-    poster = models.ImageField(upload_to=upload_to, default="logo2.svg", null=True, blank=True)
+    cover = models.ImageField(upload_to=upload_to, default="logo2.png", null=True, blank=True)
+    poster = models.ImageField(upload_to=upload_to, default="logo2.png", null=True, blank=True)
     trailer = models.CharField(max_length=300, null=True, blank=True)
     video = models.CharField(max_length=150, null=True, blank=True)
     
