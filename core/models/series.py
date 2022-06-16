@@ -13,8 +13,8 @@ class Series(models.Model):
     description_ar = models.CharField(max_length=5000, null=True, blank=True)
     description_en = models.CharField(max_length=5000, null=True, blank=True)
     
-    cover = models.ImageField(upload_to=upload_to, default="default.gif", null=True, blank=True)
-    poster = models.ImageField(upload_to=upload_to, default="default.gif", null=True, blank=True)
+    cover = models.ImageField(upload_to=upload_to, default="logo2.svg", null=True, blank=True)
+    poster = models.ImageField(upload_to=upload_to, default="logo2.svg", null=True, blank=True)
     trailer = models.CharField(max_length=300, null=True, blank=True)
     
     rating = models.IntegerField(default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
@@ -70,7 +70,7 @@ def upload_episode_to(instance, filename):
 class Episode(models.Model):
     number = models.IntegerField(default=1, validators=[MaxValueValidator(728), MinValueValidator(1)])
     
-    cover = models.ImageField(upload_to=upload_episode_to, default="default.gif", null=True, blank=True)
+    cover = models.ImageField(upload_to=upload_episode_to, default="logo2.svg", null=True, blank=True)
     video = models.CharField(max_length=150, null=True, blank=True)
 
     series = models.ForeignKey('Series', on_delete=models.CASCADE)
