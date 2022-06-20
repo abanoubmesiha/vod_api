@@ -81,7 +81,7 @@ class Episode(models.Model):
 
             "number": self.number,
 
-            "cover": self.cover.url,
+            "cover": self.cover,
             "video": self.video,
             
             "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
