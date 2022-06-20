@@ -17,5 +17,5 @@ urlpatterns = [
     path('series/<int:series_id>', series.get_one),
     path('episodes/<int:episode_id>', episodes.get_one),
     path('episodes/<int:episode_id>/video', episodes.get_episode_video),
-    path('catalog', catalog.get),
+    path('catalogs', catalog.get),
 ]

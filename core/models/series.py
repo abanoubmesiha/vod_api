@@ -49,6 +49,7 @@ class Series(models.Model):
             "poster": self.poster.url,
             "trailer": self.trailer,
 
+            "type": 'series',
             "rating": self.rating,
             "release_year": self.release_year,
             "duration": self.duration,
