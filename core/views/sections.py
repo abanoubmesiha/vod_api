@@ -1,5 +1,4 @@
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 
 from .utils import envelope
 from ..models import Section

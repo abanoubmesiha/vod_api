@@ -4,6 +4,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from .views import auth
 from .views import catalog
 from .views import episodes
+from .views import lookup
 from .views import movies
 from .views import sections
 from .views import series
@@ -18,4 +19,5 @@ urlpatterns = [
     path('episodes/<int:episode_id>', episodes.get_one),
     path('episodes/<int:episode_id>/video', episodes.get_episode_video),
     path('catalogs', catalog.get),
+    path('lookup/genres', lookup.get_genres),
 ]

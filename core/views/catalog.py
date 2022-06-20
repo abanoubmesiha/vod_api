@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 from .utils import envelope
-from ..models import Movie, Series
+from ..models import Movie, Series, Genre
 
 def get(request):
     activePageNo = request.GET.get('activePageNo')
@@ -11,27 +12,20 @@ def get(request):
     releaseYearFrom = request.GET.get('releaseYearFrom')
     releaseYearTo = request.GET.get('releaseYearTo')
     genreId = request.GET.get('genreId')
-    qualityId = request.GET.get('qualityId')
-    
-    movies = Movie.objects.filter(
-        rating__gte = ratingFrom if ratingFrom is not None else 0,
-        rating__lte = ratingTo if ratingTo is not None else 10,
-        release_year__gte = releaseYearFrom if releaseYearFrom is not None else 1888,
-        release_year__lte = releaseYearTo if releaseYearTo is not None else 3000,
-    )
 
-    series = Series.objects.filter(
-        rating__gte = ratingFrom if ratingFrom is not None else 0,
-        rating__lte = ratingTo if ratingTo is not None else 10,
-        release_year__gte = releaseYearFrom if releaseYearFrom is not None else 1888,
-        release_year__lte = releaseYearTo if releaseYearTo is not None else 3000,
-    )
+    filters = Q(rating__gte = ratingFrom) & Q(rating__lte = ratingTo) & Q(release_year__gte = releaseYearFrom) & Q(release_year__lte = releaseYearTo)
+    if genreId:
+        filters &= Q(genres__in = [genreId])
+    
+    movies = Movie.objects.filter(filters).distinct()
+
+    series = Series.objects.filter(filters).distinct()
 
     serialized_movies = [movie.serialize() for movie in movies]
     serialized_series = [s.serialize() for s in series]
     list = serialized_movies + serialized_series
 
-    paginator = Paginator(list, 10)
+    paginator = Paginator(list, 24)
     page_obj = paginator.get_page(activePageNo)
 
     data = {
