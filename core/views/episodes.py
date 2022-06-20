@@ -26,7 +26,7 @@ def get_one(request, episode_id):
 def get_episode_video(request, episode_id):
     try:
         episode = Episode.objects.get(pk=episode_id)
-        response = JsonResponse(envelope({'video': episode.video}))
+        return JsonResponse(envelope({'video': episode.video}))
     except Episode.DoesNotExist:
         return JsonResponse(envelope(None, 404, 'Item Not Found'))
     

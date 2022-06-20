@@ -12,6 +12,9 @@ def get_one(request, movie_id):
 
         serialized_movie = movie.serialize()
         serialized_movie['comments'] = [comment.serialize() for comment in comments]
+        
+        if request.user.is_authenticated is False:
+            serialized_movie['video'] = '401 Unauthorized';
             
         return JsonResponse(envelope(serialized_movie))
     except Movie.DoesNotExist:
