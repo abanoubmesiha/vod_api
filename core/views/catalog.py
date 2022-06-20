@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 from .utils import envelope
 from ..models import Movie, Series
@@ -26,5 +27,15 @@ def get(request):
 
     serialized_movies = [movie.serialize() for movie in movies]
     serialized_series = [s.serialize() for s in series]
+    list = serialized_movies + serialized_series
 
-    return JsonResponse(envelope(serialized_movies + serialized_series))
+    paginator = Paginator(list, 10)
+    page_obj = paginator.get_page(activePageNo)
+
+    data = {
+        "data": page_obj.object_list,
+        "number_of_pages": paginator.num_pages,
+        "page": page_obj.number
+    }
+
+    return JsonResponse(envelope(data))
