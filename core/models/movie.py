@@ -47,6 +47,7 @@ class Movie(models.Model):
             "trailer": self.trailer,
             "video": self.video,
 
+            "type": 'movies',
             "rating": self.rating,
             "release_year": self.release_year,
             "duration": self.duration,

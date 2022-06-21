@@ -18,7 +18,7 @@ class Series(models.Model):
     trailer = models.CharField(max_length=300, null=True, blank=True)
     
     rating = models.IntegerField(default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
-    releaseYear = models.IntegerField(default=1888, validators=[MaxValueValidator(2999), MinValueValidator(1888)])
+    release_year = models.IntegerField(default=1888, validators=[MaxValueValidator(2999), MinValueValidator(1888)])
     duration = models.IntegerField(default=0, validators=[MaxValueValidator(21840), MinValueValidator(0)])
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -49,8 +49,9 @@ class Series(models.Model):
             "poster": self.poster.url,
             "trailer": self.trailer,
 
+            "type": 'series',
             "rating": self.rating,
-            "releaseYear": self.releaseYear,
+            "release_year": self.release_year,
             "duration": self.duration,
             "created_at": self.created_at,
             
