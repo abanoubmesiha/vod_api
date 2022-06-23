@@ -27,11 +27,13 @@ class Section(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
 
+    order = models.IntegerField(default=20, validators=[MaxValueValidator(20), MinValueValidator(1)])
+    
     movies = models.ManyToManyField('Movie', blank=True)
     series = models.ManyToManyField('Series', blank=True)
 
     def __str__(self):
-        return f"{self.title_en}"
+        return f"{self.title_en} ({self.order})"
 
     def serialize(self, options={}):
         return {
@@ -41,6 +43,8 @@ class Section(models.Model):
             "title_en": self.title_en,
 
             "created_at": self.created_at,
+            
+            "order": self.order,
 
             "movies": [try_to_serialize(movie) for movie in self.movies.all()],
             "series": [try_to_serialize(series) for series in self.series.all()],
