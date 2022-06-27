@@ -69,6 +69,8 @@ class Episode(models.Model):
     
     cover = models.CharField(max_length=150, null=True, blank=True)
     video = models.CharField(max_length=150, null=True, blank=True)
+    video_medium_q = models.CharField(max_length=150, null=True, blank=True)
+    video_low_q = models.CharField(max_length=150, null=True, blank=True)
     cdn_cover = models.CharField(max_length=150, null=True, blank=True)
     cdn_video = models.CharField(max_length=150, null=True, blank=True)
 
@@ -86,6 +88,8 @@ class Episode(models.Model):
 
             "cover": self.cover,
             "video": self.video,
+            "video_medium_q": self.video_medium_q,
+            "video_low_q": self.video_low_q,
 
             "cdn_cover": self.cdn_cover,
             "cdn_video": self.cdn_video,

@@ -17,6 +17,8 @@ class Movie(models.Model):
     poster = models.ImageField(upload_to=upload_to, default="logo2.png", null=True, blank=True)
     trailer = models.CharField(max_length=150, null=True, blank=True)
     video = models.CharField(max_length=150, null=True, blank=True)
+    video_medium_q = models.CharField(max_length=150, null=True, blank=True)
+    video_low_q = models.CharField(max_length=150, null=True, blank=True)
     cdn_video = models.CharField(max_length=150, null=True, blank=True)
     
     rating = models.IntegerField(default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
@@ -47,6 +49,8 @@ class Movie(models.Model):
             "poster": self.poster.url,
             "trailer": self.trailer,
             "video": self.video,
+            "video_medium_q": self.video_medium_q,
+            "video_low_q": self.video_low_q,
             "cdn_video": self.cdn_video,
 
             "type": 'movies',
