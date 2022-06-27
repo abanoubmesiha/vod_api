@@ -69,6 +69,8 @@ class Episode(models.Model):
     
     cover = models.CharField(max_length=150, null=True, blank=True)
     video = models.CharField(max_length=150, null=True, blank=True)
+    cdn_cover = models.CharField(max_length=150, null=True, blank=True)
+    cdn_video = models.CharField(max_length=150, null=True, blank=True)
 
     series = models.ForeignKey('Series', on_delete=models.CASCADE)
 
@@ -84,6 +86,9 @@ class Episode(models.Model):
 
             "cover": self.cover,
             "video": self.video,
+
+            "cdn_cover": self.cdn_cover,
+            "cdn_video": self.cdn_video,
             
             "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
         }
