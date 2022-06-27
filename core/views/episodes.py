@@ -16,8 +16,7 @@ def get_one(request, episode_id):
 
         serialized_episode['series_episodes'] = serialized_series_episodes
         if request.user.is_authenticated is False:
-            serialized_episode['video'] = '401 Unauthorized';
-            serialized_episode['cdn_video'] = '401 Unauthorized';
+            serialized_episode['video'] = serialized_episode['video_medium_q'] = serialized_episode['video_low_q'] = serialized_episode['cdn_video'] = '401 Unauthorized';
         return JsonResponse(envelope(serialized_episode))
     except Episode.DoesNotExist:
         return JsonResponse(envelope(None, 404, 'Item Not Found'))
@@ -27,7 +26,12 @@ def get_one(request, episode_id):
 def get_episode_video(request, episode_id):
     try:
         episode = Episode.objects.get(pk=episode_id)
-        return JsonResponse(envelope({'video': episode.video, 'cdn_video': episode.cdn_video}))
+        return JsonResponse(envelope({
+            'video': episode.video,
+            'video_medium_q': episode.video_medium_q,
+            'video_low_q': episode.video_low_q,
+            'cdn_video': episode.cdn_video,
+        }))
     except Episode.DoesNotExist:
         return JsonResponse(envelope(None, 404, 'Item Not Found'))
     
