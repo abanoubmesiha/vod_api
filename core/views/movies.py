@@ -15,6 +15,7 @@ def get_one(request, movie_id):
         
         if request.user.is_authenticated is False:
             serialized_movie['video'] = '401 Unauthorized';
+            serialized_movie['cdn_video'] = '401 Unauthorized';
             
         return JsonResponse(envelope(serialized_movie))
     except Movie.DoesNotExist:
@@ -25,6 +26,6 @@ def get_one(request, movie_id):
 def get_movie_video(request, movie_id):
     try:
         movie = Movie.objects.get(pk=movie_id)
-        return JsonResponse(envelope({'video': movie.video}))
+        return JsonResponse(envelope({'video': movie.video, 'cdn_video': movie.cdn_video}))
     except Movie.DoesNotExist:
         return JsonResponse(envelope(None, 404, 'Item Not Found'))
