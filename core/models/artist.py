@@ -6,7 +6,7 @@ class Artist(models.Model):
     title_en = models.CharField(max_length=150)
 
     def __str__(self):
-        return f"{self.title_en}"
+        return f"{self.title_ar}"
 
     def serialize(self, options={}):
         return {
@@ -17,16 +17,16 @@ class Artist(models.Model):
         }
 
 class ArtistAdmin(admin.ModelAdmin):
-    search_fields = ['title_en']
+    search_fields = ['title_ar']
 
 class Actor(Artist):
     pass
 
 class ActorAdmin(admin.ModelAdmin):
-    search_fields = ['title_en']
+    search_fields = ['title_ar']
 
 class Director(Artist):
     pass
 
 class DirectorAdmin(admin.ModelAdmin):
-    search_fields = ['title_en']
+    search_fields = ['title_ar']

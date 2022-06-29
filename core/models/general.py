@@ -12,7 +12,7 @@ class Country(models.Model):
         verbose_name_plural = 'Countries'
 
     def __str__(self):
-        return f"{self.title_en}"
+        return f"{self.title_ar}"
 
     def serialize(self, options={}):
         return {
@@ -34,7 +34,7 @@ class Section(models.Model):
     series = models.ManyToManyField('Series', blank=True)
 
     def __str__(self):
-        return f"{self.title_en} ({self.order})"
+        return f"{self.title_ar} ({self.order})"
 
     def serialize(self, options={}):
         return {
@@ -51,12 +51,15 @@ class Section(models.Model):
             "series": [try_to_serialize(series) for series in self.series.all()],
         }
 
+class SectionAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['movies', 'series']
+
 class Genre(models.Model):
     title_ar = models.CharField(max_length=150)
     title_en = models.CharField(max_length=150)
 
     def __str__(self):
-        return f"{self.title_en}"
+        return f"{self.title_ar}"
 
     def serialize(self, options={}):
         return {
@@ -97,4 +100,4 @@ class Comment(models.Model):
         }
 
 class CommentAdmin(admin.ModelAdmin):
-    search_fields = ['movie__title_en', 'series__title_en', 'episode__number']
+    search_fields = ['movie__title_ar', 'series__title_ar', 'episode__number']

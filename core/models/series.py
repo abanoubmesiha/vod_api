@@ -34,7 +34,7 @@ class Series(models.Model):
         verbose_name_plural = 'Series'
 
     def __str__(self):
-        return f"{self.title_en}"
+        return f"{self.title_ar}"
 
     def serialize(self, options={}):
         return {
@@ -83,7 +83,7 @@ class Episode(models.Model):
 
     def __str__(self):
         series = try_to_serialize(self.series)
-        return f"{series.get('title_en')} - E.{self.number}"
+        return f"{series.get('title_ar')} - حلقة ({self.number})"
 
     def serialize(self, options={}):
         return {
@@ -107,5 +107,6 @@ class EpisodeAdminInline(admin.StackedInline):
     extra = 0
 
 class SeriesAdmin(admin.ModelAdmin):
-    search_fields = ['title_en']
+    search_fields = ['title_ar']
+    autocomplete_fields = ['director', 'actors', 'seasons']
     inlines = [EpisodeAdminInline]

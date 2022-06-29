@@ -34,7 +34,7 @@ class Movie(models.Model):
     actors = models.ManyToManyField('Actor', blank=True)
 
     def __str__(self):
-        return f"{self.title_en}"
+        return f"{self.title_ar}"
 
     def serialize(self, options={}):
         return {
@@ -68,4 +68,5 @@ class Movie(models.Model):
         }
 
 class MovieAdmin(admin.ModelAdmin):
-    search_fields = ['title_en']
+    search_fields = ['title_ar']
+    autocomplete_fields = ['director', 'actors']
