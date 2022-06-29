@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -99,3 +100,6 @@ class Episode(models.Model):
             
             "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
         }
+
+class EpisodeAdmin(admin.ModelAdmin):
+    search_fields = ['number', 'series__title_en']
