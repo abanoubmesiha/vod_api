@@ -3,7 +3,6 @@ from .models import (
     Movie, MovieAdmin,
     Country,
     Series, SeriesAdmin,
-    Episode, EpisodeAdmin,
     Section,
     Artist, ArtistAdmin,
     Actor, ActorAdmin,
@@ -15,7 +14,6 @@ from .models import (
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(Country)
 admin.site.register(Series, SeriesAdmin)
-admin.site.register(Episode, EpisodeAdmin)
 admin.site.register(Section)
 admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Actor, ActorAdmin)

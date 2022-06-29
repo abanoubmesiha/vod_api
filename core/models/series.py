@@ -64,8 +64,6 @@ class Series(models.Model):
             "actors": [try_to_serialize(genre) for genre in self.actors.all()],
         }
 
-class SeriesAdmin(admin.ModelAdmin):
-    search_fields = ['title_en']
 
 def upload_episode_to(instance, filename):
     series = try_to_serialize(instance.series)
@@ -104,5 +102,10 @@ class Episode(models.Model):
             "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
         }
 
-class EpisodeAdmin(admin.ModelAdmin):
-    search_fields = ['number', 'series__title_en']
+class EpisodeAdminInline(admin.StackedInline):
+    model = Episode
+    extra = 0
+
+class SeriesAdmin(admin.ModelAdmin):
+    search_fields = ['title_en']
+    inlines = [EpisodeAdminInline]
