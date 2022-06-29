@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -94,3 +95,6 @@ class Comment(models.Model):
 
             "user": None,# try_to_serialize(self.user),
         }
+
+class CommentAdmin(admin.ModelAdmin):
+    search_fields = ['movie__title_en', 'series__title_en', 'episode__number']

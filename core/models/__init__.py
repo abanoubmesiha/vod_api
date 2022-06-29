@@ -1,4 +1,4 @@
-from .general import Country, Section, Genre, Comment
-from .artist import Artist, Actor, Director
-from .movie import Movie
-from .series import Series, Episode, EpisodeAdmin
+from .general import Country, Section, Genre, Comment, CommentAdmin
+from .artist import Artist, ArtistAdmin, Actor, ActorAdmin, Director, DirectorAdmin
+from .movie import Movie, MovieAdmin
+from .series import Series, SeriesAdmin, Episode, EpisodeAdmin

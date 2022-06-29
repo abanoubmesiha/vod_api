@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -65,5 +66,6 @@ class Movie(models.Model):
             "director": try_to_serialize(self.director),
             "actors": [try_to_serialize(genre) for genre in self.actors.all()],
         }
-    
 
+class MovieAdmin(admin.ModelAdmin):
+    search_fields = ['title_en']

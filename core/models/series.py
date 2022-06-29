@@ -64,6 +64,9 @@ class Series(models.Model):
             "actors": [try_to_serialize(genre) for genre in self.actors.all()],
         }
 
+class SeriesAdmin(admin.ModelAdmin):
+    search_fields = ['title_en']
+
 def upload_episode_to(instance, filename):
     series = try_to_serialize(instance.series)
     series_title_en = series.get('title_en')
