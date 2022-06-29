@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -64,10 +65,14 @@ class Series(models.Model):
         }
 
 
+def upload_episode_to(instance, filename):
+    series = try_to_serialize(instance.series)
+    series_title_en = series.get('title_en')
+    return 'series/' + series_title_en + '/episodes/' + str(instance.number) + '/' + filename
 class Episode(models.Model):
     number = models.IntegerField(default=1, validators=[MaxValueValidator(728), MinValueValidator(1)])
     
-    cover = models.CharField(max_length=150, null=True, blank=True)
+    cover = models.ImageField(upload_to=upload_episode_to, default="logo2.png", null=True, blank=True)
     video = models.CharField(max_length=150, null=True, blank=True)
     video_medium_q = models.CharField(max_length=150, null=True, blank=True)
     video_low_q = models.CharField(max_length=150, null=True, blank=True)
@@ -96,3 +101,11 @@ class Episode(models.Model):
             
             "series": try_to_serialize(self.series) if options.get('with_series') else self.series.id
         }
+
+class EpisodeAdminInline(admin.StackedInline):
+    model = Episode
+    extra = 0
+
+class SeriesAdmin(admin.ModelAdmin):
+    search_fields = ['title_en']
+    inlines = [EpisodeAdminInline]
