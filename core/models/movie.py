@@ -47,7 +47,7 @@ class Movie(models.Model):
             "description_ar": self.description_ar,
             "description_en": self.description_en,
 
-            "streaming_server": self.streaming_server.url,
+            "streaming_server": self.streaming_server.url if self.streaming_server is not None else '',
             "cover": self.cover.url,
             "poster": self.poster.url,
             "trailer": self.trailer,
