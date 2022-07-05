@@ -22,6 +22,26 @@ class Country(models.Model):
             "title_en": self.title_en,
         }
 
+class Streaming_Server(models.Model):
+    name = models.CharField(max_length=150)
+    url = models.CharField(max_length=150)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Streaming Servers'
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def serialize(self, options={}):
+        return {
+            "id": self.id,
+
+            "name": self.name,
+            "url": self.url,
+            "created_at": self.created_at,
+        }
+
 class Section(models.Model):
     title_ar = models.CharField(max_length=150)
     title_en = models.CharField(max_length=150)
