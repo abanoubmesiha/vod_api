@@ -26,7 +26,7 @@ def get_movie_video(request, movie_id):
     try:
         movie = Movie.objects.get(pk=movie_id)
         return JsonResponse(envelope({
-            'streaming_server': movie.streaming_server,
+            'streaming_server': movie.streaming_server.url if movie.streaming_server is not None else '',
             'video': movie.video,
             'video_medium_q': movie.video_medium_q,
             'video_low_q': movie.video_low_q,
