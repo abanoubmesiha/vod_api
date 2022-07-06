@@ -14,7 +14,7 @@ class Movie(models.Model):
     description_ar = models.CharField(max_length=5000, null=True, blank=True)
     description_en = models.CharField(max_length=5000, null=True, blank=True)
     
-    streaming_server = models.ForeignKey('Streaming_Server', null=True, blank=True, on_delete=models.SET_NULL)
+    streaming_server = models.ForeignKey('Streaming_Server', default=1, null=True, blank=True, on_delete=models.SET_NULL)
     cover = models.ImageField(upload_to=upload_to, default="logo2.png", null=True, blank=True)
     poster = models.ImageField(upload_to=upload_to, default="logo2.png", null=True, blank=True)
     trailer = models.CharField(max_length=150, null=True, blank=True)
