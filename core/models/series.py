@@ -72,6 +72,7 @@ def upload_episode_to(instance, filename):
 class Episode(models.Model):
     number = models.IntegerField(default=1, validators=[MaxValueValidator(728), MinValueValidator(1)])
     
+    streaming_server = models.ForeignKey('Streaming_Server', default=1, null=True, blank=True, on_delete=models.SET_NULL)
     cover = models.ImageField(upload_to=upload_episode_to, default="logo2.png", null=True, blank=True)
     video = models.CharField(max_length=150, null=True, blank=True)
     video_medium_q = models.CharField(max_length=150, null=True, blank=True)
@@ -91,7 +92,8 @@ class Episode(models.Model):
 
             "number": self.number,
 
-            "cover": self.cover,
+            "streaming_server": self.streaming_server.url if self.streaming_server is not None else '',
+            "cover": self.cover.url if self.cover is not None else '',
             "video": self.video,
             "video_medium_q": self.video_medium_q,
             "video_low_q": self.video_low_q,
