@@ -93,7 +93,7 @@ class Episode(models.Model):
             "number": self.number,
 
             "streaming_server": self.streaming_server.url if self.streaming_server is not None else '',
-            "cover": self.cover.url if self.cover is not None else '',
+            "cover": self.cover.url if self.cover != None else '',
             "video": self.video,
             "video_medium_q": self.video_medium_q,
             "video_low_q": self.video_low_q,
