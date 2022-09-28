@@ -29,14 +29,13 @@ def add_series_episodes(request, pk):
         series_title = Series.objects.filter(
             pk=pk).values().first()['title_en']
         episode_number = ""
-
-        csv_file = open('core/CdnOutput.csv')
+        csv_file = open('core/CdnOutput.csv', encoding="utf8")
         csvreader = csv.reader(csv_file)
 
         for row in csvreader:
             if row[0:1] == [series_title]:
                 series_episodes_data.append(row[1:])
-
+        
         for episode in series_episodes_data:
             if re.search("A[0-9]+\.mp4", episode[0]):
                 episode_number = episode[0].split(".")[
@@ -50,11 +49,22 @@ def add_series_episodes(request, pk):
             elif re.search("[a-zA-Z0-9 ]+EPS\d{2}\.mp4", episode[0]):
                 episode_number = episode[0].split(" ")[-1].split(".")[
                     0][-2:]
+            
+            series_episodes = Episode.objects.filter(series__id=pk, number=episode_number)
+            
+            operation_name = "added"
+            if (series_episodes.count() > 0):
+                series_episodes[0].video = episode[0]
+                series_episodes[0].cdn_video = episode[1]
+                series_episodes[0].cdn_cover = "https://vz-76b7c0fe-9e0.b-cdn.net/" + episode[3]
+                print(series_episodes[0].cdn_cover,"https://vz-76b7c0fe-9e0.b-cdn.net/" + episode[3])
+                operation_name = "updated"
+                series_episodes[0].save()
+            else:
+                new_episode = Episode(number=episode_number, series_id=pk,
+                                    video=episode[0], cdn_video=episode[1], cdn_cover="https://vz-76b7c0fe-9e0.b-cdn.net/" + episode[3])
+                new_episode.save()
 
-            new_episode = Episode(number=episode_number, series_id=pk,
-                                  video=episode[0], cdn_video=episode[1], cdn_cover=episode[3])
-            new_episode.save()
-
-        return JsonResponse(envelope(None, 200, f'{len(series_episodes_data)} episodes of {series_title} series added successfully'))
-    except:
+        return JsonResponse(envelope(None, 200, f'{len(series_episodes_data)} episodes of {series_title} series {operation_name} successfully'))
+    except Exception as e:
         return JsonResponse(envelope(None, 404, 'Series Not Found'))
