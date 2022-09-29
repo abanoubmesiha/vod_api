@@ -50,21 +50,17 @@ def add_series_episodes(request, pk):
                 episode_number = episode[0].split(" ")[-1].split(".")[
                     0][-2:]
             
-            series_episodes = Episode.objects.filter(series__id=pk, number=episode_number)
-            
-            operation_name = "added"
-            if (series_episodes.count() > 0):
-                series_episodes[0].video = episode[0]
-                series_episodes[0].cdn_video = episode[1]
-                series_episodes[0].cdn_cover = "https://vz-76b7c0fe-9e0.b-cdn.net/" + episode[3]
-                print(series_episodes[0].cdn_cover,"https://vz-76b7c0fe-9e0.b-cdn.net/" + episode[3])
-                operation_name = "updated"
-                series_episodes[0].save()
-            else:
+            try:
+                target_episode = Episode.objects.get(series__id=pk, number=episode_number)
+                target_episode.video = episode[0]
+                target_episode.cdn_video = episode[1]
+                target_episode.cdn_cover = "https://vz-76b7c0fe-9e0.b-cdn.net/" + episode[3]
+                target_episode.save()
+            except:
                 new_episode = Episode(number=episode_number, series_id=pk,
                                     video=episode[0], cdn_video=episode[1], cdn_cover="https://vz-76b7c0fe-9e0.b-cdn.net/" + episode[3])
                 new_episode.save()
 
-        return JsonResponse(envelope(None, 200, f'{len(series_episodes_data)} episodes of {series_title} series {operation_name} successfully'))
+        return JsonResponse(envelope(None, 200, f'{len(series_episodes_data)} episodes of {series_title} series were added/updated successfully'))
     except Exception as e:
         return JsonResponse(envelope(None, 404, 'Series Not Found'))
