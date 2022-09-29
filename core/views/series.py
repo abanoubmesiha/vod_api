@@ -36,31 +36,40 @@ def add_series_episodes(request, pk):
             if row[0:1] == [series_title]:
                 series_episodes_data.append(row[1:])
         
-        for episode in series_episodes_data:
-            if re.search("A[0-9]+\.mp4", episode[0]):
-                episode_number = episode[0].split(".")[
+        for csv_episode in series_episodes_data:
+            if re.search("A[0-9]+\.mp4", csv_episode[0]):
+                episode_number = csv_episode[0].split(".")[
                     0][-2:]
-            elif re.search("[a-zA-Z_0-9-]+_Eps\d{2}\.mp4", episode[0]):
-                episode_number = episode[0].split("_")[-1].split(".")[
+            elif re.search("[a-zA-Z_0-9-]+_Eps\d{2}\.mp4", csv_episode[0]):
+                episode_number = csv_episode[0].split("_")[-1].split(".")[
                     0][-2:]
-            elif re.search("EPS\d{2}_Master\.mp4", episode[0]):
-                episode_number = episode[0].split("_")[
+            elif re.search("EPS\d{2}_Master\.mp4", csv_episode[0]):
+                episode_number = csv_episode[0].split("_")[
                     0][-2:]
-            elif re.search("[a-zA-Z0-9 ]+EPS\d{2}\.mp4", episode[0]):
-                episode_number = episode[0].split(" ")[-1].split(".")[
+            elif re.search("[a-zA-Z0-9 ]+EPS\d{2}\.mp4", csv_episode[0]):
+                episode_number = csv_episode[0].split(" ")[-1].split(".")[
                     0][-2:]
             
+            video_id = csv_episode[2]
+            video_id_plus_thumbnail = csv_episode[3]
+            
+            cdn_video_link = "https://video.bunnycdn.com/play/50219/" + video_id
+            thumbnail_link = "https://vz-76b7c0fe-9e0.b-cdn.net/" + video_id_plus_thumbnail
+
             try:
                 target_episode = Episode.objects.get(series__id=pk, number=episode_number)
-                target_episode.video = episode[0]
-                target_episode.cdn_video = episode[1]
-                target_episode.cdn_cover = "https://vz-76b7c0fe-9e0.b-cdn.net/" + episode[3]
+                target_episode.cdn_video=cdn_video_link
+                target_episode.cdn_cover=thumbnail_link
                 target_episode.save()
             except:
-                new_episode = Episode(number=episode_number, series_id=pk,
-                                    video=episode[0], cdn_video=episode[1], cdn_cover="https://vz-76b7c0fe-9e0.b-cdn.net/" + episode[3])
+                new_episode = Episode(
+                    number=episode_number,
+                    series_id=pk,
+                    cdn_video=cdn_video_link,
+                    cdn_cover=thumbnail_link
+                )
                 new_episode.save()
 
         return JsonResponse(envelope(None, 200, f'{len(series_episodes_data)} episodes of {series_title} series were added/updated successfully'))
     except Exception as e:
-        return JsonResponse(envelope(None, 404, 'Series Not Found'))
+        return JsonResponse(envelope(e, 404, 'Series Not Found'))
