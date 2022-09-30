@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-hn6pv8&8pl$t8pkw&h(*i-c7rx_zsk&86e$sf9!6+aj2gp#$$!
 DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '49.12.195.122', '49.12.195.122:8000', '49.12.195.122:3000']
-CORS_ALLOWED_ORIGINS = ['http://localhost', 'http://127.0.0.1', 'http://49.12.195.122', 'http://49.12.195.122:8000', 'http://49.12.195.122:3000']
+CORS_ALLOWED_ORIGINS = ['http://localhost', 'http://localhost:3002', 'http://127.0.0.1', 'http://49.12.195.122', 'http://49.12.195.122:8000', 'http://49.12.195.122:3000']
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'core.middlewares.CORS'
 ]
 
 ROOT_URLCONF = 'vod.urls'
