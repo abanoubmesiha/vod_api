@@ -20,6 +20,5 @@ urlpatterns = [
     path('episodes/<int:episode_id>/video', episodes.get_episode_video),
     path('catalogs', catalog.get),
     path('lookup/genres', lookup.get_genres),
-    path("series", series.add_series),
-    path('series/<int:pk>/eps', series.add_series_episodes)
+    path("series", series.add_series)
 ]
