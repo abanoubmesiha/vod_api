@@ -17,7 +17,7 @@ urlpatterns = [
     path('movies/<int:movie_id>/video', movies.get_movie_video),
     path('movies/csv', movies.add_movies_from_csv),
     path('series/<int:series_id>', series.get_one),
-    path('series/<int:pk>/eps', series.add_series_episodes),
+    path("series/csv", series.add_series)
     path('episodes/<int:episode_id>', episodes.get_one),
     path('episodes/<int:episode_id>/video', episodes.get_episode_video),
     path('catalogs', catalog.get),
