@@ -15,10 +15,11 @@ urlpatterns = [
     path('sections', sections.get_all),
     path('movies/<int:movie_id>', movies.get_one),
     path('movies/<int:movie_id>/video', movies.get_movie_video),
+    path('movies/csv', movies.add_movies_from_csv),
     path('series/<int:series_id>', series.get_one),
+    path('series/<int:pk>/eps', series.add_series_episodes),
     path('episodes/<int:episode_id>', episodes.get_one),
     path('episodes/<int:episode_id>/video', episodes.get_episode_video),
     path('catalogs', catalog.get),
     path('lookup/genres', lookup.get_genres),
-    path('series/<int:pk>/eps', series.add_series_episodes)
 ]
