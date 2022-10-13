@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import (
     Movie, MovieAdmin,
-    Country, Streaming_Server,
+    Country,
     Series, SeriesAdmin,
     Section, SectionAdmin,
     Artist, ArtistAdmin,
@@ -13,7 +13,6 @@ from .models import (
 
 admin.site.register(Movie, MovieAdmin)
 admin.site.register(Country)
-admin.site.register(Streaming_Server)
 admin.site.register(Series, SeriesAdmin)
 admin.site.register(Section, SectionAdmin)
 admin.site.register(Artist, ArtistAdmin)

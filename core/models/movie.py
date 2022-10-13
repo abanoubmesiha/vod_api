@@ -14,13 +14,9 @@ class Movie(models.Model):
     description_ar = models.CharField(max_length=5000, null=True, blank=True)
     description_en = models.CharField(max_length=5000, null=True, blank=True)
     
-    streaming_server = models.ForeignKey('Streaming_Server', default=1, null=True, blank=True, on_delete=models.SET_NULL)
     cover = models.ImageField(upload_to=upload_to, default="logo2.png", null=True, blank=True)
     poster = models.ImageField(upload_to=upload_to, default="logo2.png", null=True, blank=True)
     trailer = models.CharField(max_length=150, null=True, blank=True)
-    video = models.CharField(max_length=150, null=True, blank=True)
-    video_medium_q = models.CharField(max_length=150, null=True, blank=True)
-    video_low_q = models.CharField(max_length=150, null=True, blank=True)
     cdn_video = models.CharField(max_length=150, null=True, blank=True)
     
     rating = models.IntegerField(default=0, validators=[MaxValueValidator(10), MinValueValidator(0)])
@@ -47,13 +43,9 @@ class Movie(models.Model):
             "description_ar": self.description_ar,
             "description_en": self.description_en,
 
-            "streaming_server": self.streaming_server.url if self.streaming_server is not None else '',
             "cover": self.cover.url,
             "poster": self.poster.url,
             "trailer": self.trailer,
-            "video": self.video,
-            "video_medium_q": self.video_medium_q,
-            "video_low_q": self.video_low_q,
             "cdn_video": self.cdn_video,
 
             "type": 'movies',
